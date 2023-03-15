@@ -1,5 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import { Box, Container, CssBaseline } from '@mui/material';
+import { Box, Container, Paper } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Link from '@mui/material/Link';
@@ -46,70 +46,72 @@ export default function SignInForm() {
       <Container
         maxWidth="sm"
         sx={{
-          minHeight: '50vh',
+          minHeight: '60vh',
           display: 'flex',
           alignItems: 'stretch',
         }}
       >
-        <Box
-          sx={{
-            minHeight: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: 0,
-            paddingTop: '20%',
-            border: 1,
-            borderColor: 'rgb(128, 128, 128)',
-            borderRadius: 2,
-            padding: 2,
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+        <Paper elevation={8}>
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              minHeight: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: 0,
+              paddingTop: '20%',
+              border: 1,
+              borderColor: 'rgb(128, 128, 128)',
+              borderRadius: 1,
+              padding: 2,
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
             >
-              Sign In
-            </Button>
-            <NavLink to="/SignUpForm">
-              <Link component="button" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </NavLink>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <NavLink to="/SignUpForm">
+                <Link component="button" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </NavLink>
+            </Box>
           </Box>
-        </Box>
+        </Paper>
       </Container>
     </ThemeProvider>
   );
