@@ -8,6 +8,22 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../App';
+import { Auth } from 'aws-amplify';
+
+async function signUp(email, password, nickname) {
+  try {
+    const { user } = await Auth.signUp({
+      username: email,
+      password: password,
+      attributes: {
+        nickname: nickname, // optional
+      },
+    });
+    console.log(user);
+  } catch (error) {
+    console.log('error signing up:', error);
+  }
+}
 
 const theme = createTheme({
   palette: {
@@ -29,11 +45,10 @@ export default function SignUpForm() {
     event.preventDefault();
     let data = new FormData(event.currentTarget);
     console.log(data);
-    user.setUser({
-      nickname: data.get('nickname'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    let nickname = data.get('nickname');
+    let email = data.get('email');
+    let password = data.get('password');
+    signUp(email, password, nickname);
   }
   return (
     <ThemeProvider theme={theme}>

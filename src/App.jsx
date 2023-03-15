@@ -5,6 +5,10 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import SignInForm from './signInForm/SignInForm';
 import SignUpForm from './signUpForm/SignUpForm';
 import { CssBaseline } from '@mui/material';
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+
+Amplify.configure(awsconfig);
 
 export const UserContext = createContext();
 
