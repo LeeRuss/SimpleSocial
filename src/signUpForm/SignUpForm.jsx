@@ -4,7 +4,10 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../App';
 
 const theme = createTheme({
   palette: {
@@ -19,16 +22,41 @@ const theme = createTheme({
 });
 
 export default function SignUpForm() {
+  const user = useContext(UserContext);
+  console.log('formularz - ' + user.user);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let data = new FormData(event.currentTarget);
+    console.log(data);
+    user.setUser({
+      nickname: data.get('nickname'),
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  }
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="xs">
-        <CssBaseline />
+      <Container
+        maxWidth="sm"
+        sx={{
+          minHeight: '50vh',
+          display: 'flex',
+          alignItems: 'stretch',
+        }}
+      >
         <Box
           sx={{
+            minHeight: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
             alignItems: 'center',
+            padding: 0,
+            paddingTop: '20%',
+            border: 1,
+            borderColor: 'rgb(128, 128, 128)',
+            borderRadius: 2,
+            padding: 2,
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -37,49 +65,54 @@ export default function SignUpForm() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="nickname"
-            label="Nickname"
-            name="nickname"
-            autoComplete="nickname"
-            autoFocus
-          />
+          <Box component="form" onSubmit={handleSubmit} noValidate>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="nickname"
+              label="Nickname"
+              name="nickname"
+              autoComplete="nickname"
+              autoFocus
+            />
 
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
 
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign Up
-          </Button>
-          <Link href="#" variant="body2">
-            {'Already have an account? Sign In'}
-          </Link>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+          </Box>
+
+          <RouterLink to="/">
+            <Link component="button" variant="body2">
+              {'Already have an account? Sign In'}
+            </Link>
+          </RouterLink>
         </Box>
       </Container>
     </ThemeProvider>

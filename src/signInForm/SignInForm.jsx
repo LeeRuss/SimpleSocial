@@ -1,15 +1,12 @@
-import './SignInForm.scss';
-
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import { Button, TextField } from '@mui/material';
+import { Box, Container, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../App';
 
 const theme = createTheme({
   palette: {
@@ -24,10 +21,11 @@ const theme = createTheme({
 });
 
 export default function SignInForm() {
+  const user = useContext(UserContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    user.setUser({
       email: data.get('email'),
       password: data.get('password'),
     });
@@ -35,13 +33,26 @@ export default function SignInForm() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+      <Container
+        maxWidth="sm"
+        sx={{
+          minHeight: '50vh',
+          display: 'flex',
+          alignItems: 'stretch',
+        }}
+      >
         <Box
           sx={{
+            minHeight: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            padding: 0,
+            paddingTop: '20%',
+            border: 1,
+            borderColor: 'rgb(128, 128, 128)',
+            borderRadius: 2,
+            padding: 2,
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
