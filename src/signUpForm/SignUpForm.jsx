@@ -6,8 +6,6 @@ import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { UserContext } from '../App';
 import { Auth } from 'aws-amplify';
 
 async function signUp(email, password, nickname) {
@@ -38,9 +36,6 @@ const theme = createTheme({
 });
 
 export default function SignUpForm() {
-  const user = useContext(UserContext);
-  console.log('formularz - ' + user.user);
-
   function handleSubmit(event) {
     event.preventDefault();
     let data = new FormData(event.currentTarget);

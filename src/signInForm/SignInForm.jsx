@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../App';
+import { Auth } from 'aws-amplify';
 
 const theme = createTheme({
   palette: {
@@ -20,16 +21,25 @@ const theme = createTheme({
   },
 });
 
+async function signIn(email, password, userContext) {
+  try {
+    const user = await Auth.signIn(email, password);
+    console.log('Sign in successful', user);
+    userContext.setUser(user);
+  } catch (error) {
+    console.log('Error signing in', error);
+  }
+}
+
 export default function SignInForm() {
   const user = useContext(UserContext);
-  const handleSubmit = (event) => {
+  function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    user.setUser({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    let email = data.get('email');
+    let password = data.get('password');
+    signIn(email, password, user);
+  }
 
   return (
     <ThemeProvider theme={theme}>

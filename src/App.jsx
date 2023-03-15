@@ -14,16 +14,12 @@ export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
-  console.log('stan uzytkownika w aplikacji-' + JSON.stringify(user));
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <div className="App">
         <CssBaseline />
-        <Routes>
-          <Route index element={<SignInForm />} />
-          <Route path="/signupform" element={<SignUpForm />} />
-        </Routes>
+        {user === null ? <SignInForm></SignInForm> : <div></div>}
       </div>
     </UserContext.Provider>
   );
