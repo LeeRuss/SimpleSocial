@@ -66,7 +66,7 @@ export default function SignUpForm() {
               paddingTop: '20%',
               border: 1,
               borderColor: 'rgb(128, 128, 128)',
-              borderRadius: 2,
+              borderRadius: 1,
               padding: 2,
             }}
           >
