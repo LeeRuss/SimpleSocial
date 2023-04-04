@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg';
 import './AppContainer.css';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import App from './App';
-import SignUpForm from './signUpForm/SignUpForm';
+import SignUpForm from './app/SignUpForm.jsx';
 import { CssBaseline } from '@mui/material';
 import { Amplify } from 'aws-amplify';
 import awsconfig from './aws-exports';
