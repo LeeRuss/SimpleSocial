@@ -1,0 +1,11 @@
+{
+  "resourceName": "s3testingstoraged625e700",
+  "bucketName": "testing-storage-d625e700",
+  "policyUUID": "f6abc440",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

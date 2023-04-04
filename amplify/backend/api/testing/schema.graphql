@@ -1,0 +1,18 @@
+type Comments @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  postsID: ID! @index(name: "byPosts")
+  creation_time: AWSDateTime!
+  text: String!
+  creator_id: ID
+}
+
+type Posts @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  creation_time: AWSDateTime!
+  text: String!
+  likes: Int!
+  Comments: [Comments] @hasMany(indexName: "byPosts", fields: ["id"])
+  images: [AWSURL]
+  creator_id: ID
+}
+ 

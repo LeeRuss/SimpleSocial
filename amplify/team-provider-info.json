@@ -10,6 +10,14 @@
       "StackName": "amplify-testing-staging-185611",
       "StackId": "arn:aws:cloudformation:eu-central-1:470765145472:stack/amplify-testing-staging-185611/bd43f380-b3ab-11ed-99f8-02f07fd68fb2",
       "AmplifyAppId": "d5wwr4ru75y5i"
+    },
+    "categories": {
+      "auth": {
+        "testing": {}
+      },
+      "storage": {
+        "s3testingstoraged625e700": {}
+      }
     }
   }
 }
