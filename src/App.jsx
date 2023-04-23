@@ -1,33 +1,22 @@
 import { useState, createContext } from 'react';
-import reactLogo from './assets/react.svg';
 import './App.css';
-import { Routes, Route, Outlet } from 'react-router-dom';
-import SignInForm from './app/SignInForm.jsx';
-import SignUpForm from './app/SignUpForm.jsx';
-import { CssBaseline } from '@mui/material';
 import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 import awsconfig from './aws-exports';
-import ProfilePage from './app/ProfilePage';
 
 Amplify.configure(awsconfig);
 
 export const UserContext = createContext();
 
-function App() {
-  const [user, setUser] = useState(null);
-
+function App({ signOut, user }) {
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, signOut }}>
       <div className="App">
-        <CssBaseline />
-        {user === null ? (
-          <SignInForm></SignInForm>
-        ) : (
-          <ProfilePage></ProfilePage>
-        )}
+        <h1>Hello {user.username}</h1>
+        <button onClick={signOut}>Sign Out</button>
       </div>
     </UserContext.Provider>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
