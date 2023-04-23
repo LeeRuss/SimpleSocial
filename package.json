@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^4.6.0",
     "@mui/icons-material": "^5.11.11",
     "aws-amplify": "^5.0.19",
     "localforage": "^1.10.0",
