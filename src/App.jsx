@@ -2,6 +2,7 @@ import { useState, createContext } from 'react';
 import './App.css';
 import { Amplify } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
 
 Amplify.configure(awsconfig);
@@ -9,6 +10,7 @@ Amplify.configure(awsconfig);
 export const UserContext = createContext();
 
 function App({ signOut, user }) {
+  console.log(user);
   return (
     <UserContext.Provider value={{ user, signOut }}>
       <div className="App">
