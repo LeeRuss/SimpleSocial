@@ -1,8 +1,11 @@
 import { useState, createContext } from 'react';
-import './App.css';
+import './app/signIn/style.css';
 import { Amplify } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
+import SignInFooter from './app/signIn/SignInFooter';
+import SignInHeader from './app/signIn/SignInHeader';
+import Header from './app/signIn/Header';
+import Footer from './app/signIn/Footer';
 import awsconfig from './aws-exports';
 
 Amplify.configure(awsconfig);
@@ -14,11 +17,20 @@ function App({ signOut, user }) {
   return (
     <UserContext.Provider value={{ user, signOut }}>
       <div className="App">
-        <h1>Hello {user.username}</h1>
+        <h1>Hello {user.attributes.nickname}</h1>
         <button onClick={signOut}>Sign Out</button>
       </div>
     </UserContext.Provider>
   );
 }
 
-export default withAuthenticator(App);
+export default withAuthenticator(App, {
+  components: {
+    Header,
+    SignIn: {
+      Header: SignInHeader,
+      Footer: SignInFooter,
+    },
+    Footer,
+  },
+});
