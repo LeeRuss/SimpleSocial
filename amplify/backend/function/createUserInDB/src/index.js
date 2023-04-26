@@ -20,6 +20,8 @@ exports.handler = async (event, context) => {
         description: { S: 'Welcome on my profile!' },
         createdAt: { S: date.toISOString() },
         updatedAt: { S: date.toISOString() },
+        _lastChangedAt: { S: date.toISOString() },
+        _version: { S: 1 },
       },
       TableName: 'Users-opwcfsmlrfgbtknhf4topro6pm-staging',
     };
