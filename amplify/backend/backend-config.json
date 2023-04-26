@@ -56,6 +56,40 @@
       "service": "Cognito"
     }
   },
+  "function": {
+    "createUserInDB": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_createUserInDB_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserInDB"
+        }
+      ]
+    },
+    "AMPLIFY_function_createUserInDB_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserInDB"
+        }
+      ]
+    },
+    "AMPLIFY_function_createUserInDB_userTable": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserInDB"
+        }
+      ]
+    }
+  },
   "storage": {
     "s3testingstoraged625e700": {
       "dependsOn": [],

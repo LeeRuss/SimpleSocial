@@ -13,10 +13,21 @@
     },
     "categories": {
       "auth": {
-        "testing": {}
+        "testing": {},
+        "userPoolGroups": {}
       },
       "storage": {
         "s3testingstoraged625e700": {}
+      },
+      "function": {
+        "createUserInDB": {
+          "userTable": "Users-opwcfsmlrfgbtknhf4topro6pm-staging",
+          "deploymentBucketName": "amplify-testing-staging-185611-deployment",
+          "s3Key": "amplify-builds/createUserInDB-694f5a6d683169724157-build.zip"
+        }
+      },
+      "api": {
+        "testing": {}
       }
     }
   }
