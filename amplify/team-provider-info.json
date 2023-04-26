@@ -23,7 +23,7 @@
         "createUserInDB": {
           "userTable": "Users-opwcfsmlrfgbtknhf4topro6pm-staging",
           "deploymentBucketName": "amplify-testing-staging-185611-deployment",
-          "s3Key": "amplify-builds/createUserInDB-5969785374715a487935-build.zip"
+          "s3Key": "amplify-builds/createUserInDB-2b4a534a705869575661-build.zip"
         }
       },
       "api": {
