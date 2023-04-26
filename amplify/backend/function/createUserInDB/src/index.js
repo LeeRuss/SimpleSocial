@@ -18,6 +18,8 @@ exports.handler = async (event, context) => {
         id: { S: event.request.userAttributes.sub },
         nickname: { S: event.request.userAttributes.nickname },
         description: { S: 'Welcome on my profile!' },
+        createdAt: { S: date.toISOString() },
+        updatedAt: { S: date.toISOString() },
       },
       TableName: 'Users-opwcfsmlrfgbtknhf4topro6pm-staging',
     };
