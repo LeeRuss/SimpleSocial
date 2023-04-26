@@ -17,14 +17,12 @@ export declare type PostsCreateFormInputValues = {
     text?: string;
     likes?: number;
     images?: string[];
-    creator_id?: string;
 };
 export declare type PostsCreateFormValidationValues = {
     creation_time?: ValidationFunction<string>;
     text?: ValidationFunction<string>;
     likes?: ValidationFunction<number>;
     images?: ValidationFunction<string>;
-    creator_id?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type PostsCreateFormOverridesProps = {
@@ -33,7 +31,6 @@ export declare type PostsCreateFormOverridesProps = {
     text?: PrimitiveOverrideProps<TextFieldProps>;
     likes?: PrimitiveOverrideProps<TextFieldProps>;
     images?: PrimitiveOverrideProps<TextFieldProps>;
-    creator_id?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type PostsCreateFormProps = React.PropsWithChildren<{
     overrides?: PostsCreateFormOverridesProps | undefined | null;

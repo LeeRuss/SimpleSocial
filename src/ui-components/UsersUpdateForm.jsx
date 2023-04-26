@@ -24,21 +24,20 @@ export default function UsersUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    user_id: "",
-    user_name: "",
-    email: "",
+    nickname: "",
+    description: "",
   };
-  const [user_id, setUser_id] = React.useState(initialValues.user_id);
-  const [user_name, setUser_name] = React.useState(initialValues.user_name);
-  const [email, setEmail] = React.useState(initialValues.email);
+  const [nickname, setNickname] = React.useState(initialValues.nickname);
+  const [description, setDescription] = React.useState(
+    initialValues.description
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = usersRecord
       ? { ...initialValues, ...usersRecord }
       : initialValues;
-    setUser_id(cleanValues.user_id);
-    setUser_name(cleanValues.user_name);
-    setEmail(cleanValues.email);
+    setNickname(cleanValues.nickname);
+    setDescription(cleanValues.description);
     setErrors({});
   };
   const [usersRecord, setUsersRecord] = React.useState(usersModelProp);
@@ -53,9 +52,8 @@ export default function UsersUpdateForm(props) {
   }, [idProp, usersModelProp]);
   React.useEffect(resetStateValues, [usersRecord]);
   const validations = {
-    user_id: [{ type: "Required" }],
-    user_name: [{ type: "Required" }],
-    email: [{ type: "Required" }, { type: "Email" }],
+    nickname: [{ type: "Required" }],
+    description: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -83,9 +81,8 @@ export default function UsersUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          user_id,
-          user_name,
-          email,
+          nickname,
+          description,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -133,82 +130,54 @@ export default function UsersUpdateForm(props) {
       {...rest}
     >
       <TextField
-        label="User id"
+        label="Nickname"
         isRequired={true}
         isReadOnly={false}
-        value={user_id}
+        value={nickname}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              user_id: value,
-              user_name,
-              email,
+              nickname: value,
+              description,
             };
             const result = onChange(modelFields);
-            value = result?.user_id ?? value;
+            value = result?.nickname ?? value;
           }
-          if (errors.user_id?.hasError) {
-            runValidationTasks("user_id", value);
+          if (errors.nickname?.hasError) {
+            runValidationTasks("nickname", value);
           }
-          setUser_id(value);
+          setNickname(value);
         }}
-        onBlur={() => runValidationTasks("user_id", user_id)}
-        errorMessage={errors.user_id?.errorMessage}
-        hasError={errors.user_id?.hasError}
-        {...getOverrideProps(overrides, "user_id")}
+        onBlur={() => runValidationTasks("nickname", nickname)}
+        errorMessage={errors.nickname?.errorMessage}
+        hasError={errors.nickname?.hasError}
+        {...getOverrideProps(overrides, "nickname")}
       ></TextField>
       <TextField
-        label="User name"
-        isRequired={true}
+        label="Description"
+        isRequired={false}
         isReadOnly={false}
-        value={user_name}
+        value={description}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              user_id,
-              user_name: value,
-              email,
+              nickname,
+              description: value,
             };
             const result = onChange(modelFields);
-            value = result?.user_name ?? value;
+            value = result?.description ?? value;
           }
-          if (errors.user_name?.hasError) {
-            runValidationTasks("user_name", value);
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
           }
-          setUser_name(value);
+          setDescription(value);
         }}
-        onBlur={() => runValidationTasks("user_name", user_name)}
-        errorMessage={errors.user_name?.errorMessage}
-        hasError={errors.user_name?.hasError}
-        {...getOverrideProps(overrides, "user_name")}
-      ></TextField>
-      <TextField
-        label="Email"
-        isRequired={true}
-        isReadOnly={false}
-        value={email}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              user_id,
-              user_name,
-              email: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.email ?? value;
-          }
-          if (errors.email?.hasError) {
-            runValidationTasks("email", value);
-          }
-          setEmail(value);
-        }}
-        onBlur={() => runValidationTasks("email", email)}
-        errorMessage={errors.email?.errorMessage}
-        hasError={errors.email?.hasError}
-        {...getOverrideProps(overrides, "email")}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
       ></TextField>
       <Flex
         justifyContent="space-between"

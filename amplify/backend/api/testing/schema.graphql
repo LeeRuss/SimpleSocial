@@ -1,18 +1,26 @@
+type Users @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nickname: String!
+  description: String
+  Posts: [Posts] @hasMany(indexName: "byUsers", fields: ["id"])
+  Comments: [Comments] @hasMany(indexName: "byUsers", fields: ["id"])
+}
+
 type Comments @model @auth(rules: [{allow: public}]) {
   id: ID!
   postsID: ID! @index(name: "byPosts")
   creation_time: AWSDateTime!
   text: String!
-  creator_id: ID
+  usersID: ID! @index(name: "byUsers")
 }
 
 type Posts @model @auth(rules: [{allow: public}]) {
   id: ID!
   creation_time: AWSDateTime!
   text: String!
-  likes: Int!
+  likes: Int
   Comments: [Comments] @hasMany(indexName: "byPosts", fields: ["id"])
-  images: [AWSURL]
-  creator_id: ID
+  images: [AWSURL!]!
+  usersID: ID! @index(name: "byUsers")
 }
  

@@ -6,6 +6,40 @@ import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/
 
 
 
+type EagerUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Users, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly nickname: string;
+  readonly description?: string | null;
+  readonly Posts?: (Posts | null)[] | null;
+  readonly Comments?: (Comments | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Users, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly nickname: string;
+  readonly description?: string | null;
+  readonly Posts: AsyncCollection<Posts>;
+  readonly Comments: AsyncCollection<Comments>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Users = LazyLoading extends LazyLoadingDisabled ? EagerUsers : LazyUsers
+
+export declare const Users: (new (init: ModelInit<Users>) => Users) & {
+  copyOf(source: Users, mutator: (draft: MutableModel<Users>) => MutableModel<Users> | void): Users;
+}
+
 type EagerComments = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Comments, 'id'>;
@@ -15,7 +49,7 @@ type EagerComments = {
   readonly postsID: string;
   readonly creation_time: string;
   readonly text: string;
-  readonly creator_id?: string | null;
+  readonly usersID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -29,7 +63,7 @@ type LazyComments = {
   readonly postsID: string;
   readonly creation_time: string;
   readonly text: string;
-  readonly creator_id?: string | null;
+  readonly usersID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -48,10 +82,10 @@ type EagerPosts = {
   readonly id: string;
   readonly creation_time: string;
   readonly text: string;
-  readonly likes: number;
+  readonly likes?: number | null;
   readonly Comments?: (Comments | null)[] | null;
-  readonly images?: (string | null)[] | null;
-  readonly creator_id?: string | null;
+  readonly images: string[];
+  readonly usersID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -64,10 +98,10 @@ type LazyPosts = {
   readonly id: string;
   readonly creation_time: string;
   readonly text: string;
-  readonly likes: number;
+  readonly likes?: number | null;
   readonly Comments: AsyncCollection<Comments>;
-  readonly images?: (string | null)[] | null;
-  readonly creator_id?: string | null;
+  readonly images: string[];
+  readonly usersID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

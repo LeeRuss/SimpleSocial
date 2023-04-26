@@ -196,7 +196,6 @@ export default function PostsCreateForm(props) {
     text: "",
     likes: "",
     images: [],
-    creator_id: "",
   };
   const [creation_time, setCreation_time] = React.useState(
     initialValues.creation_time
@@ -204,7 +203,6 @@ export default function PostsCreateForm(props) {
   const [text, setText] = React.useState(initialValues.text);
   const [likes, setLikes] = React.useState(initialValues.likes);
   const [images, setImages] = React.useState(initialValues.images);
-  const [creator_id, setCreator_id] = React.useState(initialValues.creator_id);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setCreation_time(initialValues.creation_time);
@@ -212,7 +210,6 @@ export default function PostsCreateForm(props) {
     setLikes(initialValues.likes);
     setImages(initialValues.images);
     setCurrentImagesValue("");
-    setCreator_id(initialValues.creator_id);
     setErrors({});
   };
   const [currentImagesValue, setCurrentImagesValue] = React.useState("");
@@ -220,9 +217,8 @@ export default function PostsCreateForm(props) {
   const validations = {
     creation_time: [{ type: "Required" }],
     text: [{ type: "Required" }],
-    likes: [{ type: "Required" }],
-    images: [{ type: "URL" }],
-    creator_id: [],
+    likes: [],
+    images: [{ type: "Required" }, { type: "URL" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -271,7 +267,6 @@ export default function PostsCreateForm(props) {
           text,
           likes,
           images,
-          creator_id,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -332,7 +327,6 @@ export default function PostsCreateForm(props) {
               text,
               likes,
               images,
-              creator_id,
             };
             const result = onChange(modelFields);
             value = result?.creation_time ?? value;
@@ -360,7 +354,6 @@ export default function PostsCreateForm(props) {
               text: value,
               likes,
               images,
-              creator_id,
             };
             const result = onChange(modelFields);
             value = result?.text ?? value;
@@ -377,7 +370,7 @@ export default function PostsCreateForm(props) {
       ></TextField>
       <TextField
         label="Likes"
-        isRequired={true}
+        isRequired={false}
         isReadOnly={false}
         type="number"
         step="any"
@@ -392,7 +385,6 @@ export default function PostsCreateForm(props) {
               text,
               likes: value,
               images,
-              creator_id,
             };
             const result = onChange(modelFields);
             value = result?.likes ?? value;
@@ -416,7 +408,6 @@ export default function PostsCreateForm(props) {
               text,
               likes,
               images: values,
-              creator_id,
             };
             const result = onChange(modelFields);
             values = result?.images ?? values;
@@ -435,7 +426,7 @@ export default function PostsCreateForm(props) {
       >
         <TextField
           label="Images"
-          isRequired={false}
+          isRequired={true}
           isReadOnly={false}
           value={currentImagesValue}
           onChange={(e) => {
@@ -453,34 +444,6 @@ export default function PostsCreateForm(props) {
           {...getOverrideProps(overrides, "images")}
         ></TextField>
       </ArrayField>
-      <TextField
-        label="Creator id"
-        isRequired={false}
-        isReadOnly={false}
-        value={creator_id}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              creation_time,
-              text,
-              likes,
-              images,
-              creator_id: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.creator_id ?? value;
-          }
-          if (errors.creator_id?.hasError) {
-            runValidationTasks("creator_id", value);
-          }
-          setCreator_id(value);
-        }}
-        onBlur={() => runValidationTasks("creator_id", creator_id)}
-        errorMessage={errors.creator_id?.errorMessage}
-        hasError={errors.creator_id?.hasError}
-        {...getOverrideProps(overrides, "creator_id")}
-      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
