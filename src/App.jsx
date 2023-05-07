@@ -1,4 +1,5 @@
 import { useState, createContext } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import './app/signIn/style.css';
 import { Amplify } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
@@ -6,25 +7,28 @@ import SignInFooter from './app/signIn/SignInFooter';
 import SignInHeader from './app/signIn/SignInHeader';
 import Header from './app/signIn/Header';
 import Footer from './app/signIn/Footer';
-import { Link, Outlet } from 'react-router-dom';
 import awsconfig from './aws-exports';
 import styled from 'styled-components';
+import AppHeader from './app/header/AppHeader';
 
 Amplify.configure(awsconfig);
+
+export const UserContext = createContext(undefined);
+
+const AppWrapper = styled.div`
+  height: 100vh;
+  background-color: hsl(220, 95%, 95%);
+`;
 
 function App({ signOut, user }) {
   console.log(user);
   return (
-    <div className="App">
-      <nav>
-        <button></button>
-        <Link to="/"> Home</Link>
-      </nav>
-
+    <AppWrapper>
+      <UserContext.Provider value={{ signOut: signOut, user: user }}>
+        <AppHeader></AppHeader>
+      </UserContext.Provider>
       <Outlet context={user} />
-      <h1>Hello {user.attributes.nickname}</h1>
-      <button onClick={signOut}>Sign Out</button>
-    </div>
+    </AppWrapper>
   );
 }
 

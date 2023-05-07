@@ -36,8 +36,7 @@ body {
   min-height: 100vh;
   background-color: white;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
 h1 {
@@ -75,4 +74,14 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  font-size: 4em;
+}
+
+textarea,
+input {
+  outline: none;
 }
