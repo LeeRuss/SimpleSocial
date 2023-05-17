@@ -42,7 +42,6 @@ export default function ProfileLinksContainer({ users }) {
       {users.map((item, i) => {
         return (
           <SearchBarLink to="/profile" state={{ user: item.id }} key={i}>
-            <img src=""></img>
             {item.nickname}
           </SearchBarLink>
         );
