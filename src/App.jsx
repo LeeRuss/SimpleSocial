@@ -16,8 +16,10 @@ Amplify.configure(awsconfig);
 export const UserContext = createContext(undefined);
 
 const AppWrapper = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   background-color: hsl(220, 95%, 95%);
+  display: flex;
+  flex-direction: column;
 `;
 
 function App({ signOut, user }) {

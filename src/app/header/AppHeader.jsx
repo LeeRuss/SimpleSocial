@@ -7,12 +7,16 @@ import Searchbar from './Searchbar';
 
 const Header = styled.header`
   display: grid;
+  position: sticky;
+  top: 0;
+  width: 100%;
   grid-template-rows: [row-start] 100% [row-end];
   grid-template-columns: [first] 30% [searchbar-start] 40%[buttons-start] 30% [buttons-end];
-  min-height: 50px;
+  min-height: 65px;
   height: 8%;
   max-width: 100%;
   background-color: hsl(220, 50%, 50%);
+  box-shadow: 0px 7px 14px 6px rgba(66, 68, 90, 1);
   color: white;
   @media only screen and (max-width: 500px) {
     grid-template-columns: [first] auto [searchbar-start] 50% [buttons-start] auto [buttons-end];
