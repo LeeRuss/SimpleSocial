@@ -16,7 +16,7 @@ const Avatar = styled.img`
   border-radius: 50%;
   border: 2px solid black;
 
-  @media only screen and (max-width: 360px) {
+  @media only screen and (max-width: 400px) {
     width: 10vh;
     height: 10vh;
   }
@@ -39,7 +39,7 @@ const AvatarLoading = styled.div`
   border-radius: 50%;
   border: 2px solid black;
 
-  @media only screen and (max-width: 360px) {
+  @media only screen and (max-width: 400px) {
     width: 10vh;
     height: 10vh;
   }
@@ -47,16 +47,11 @@ const AvatarLoading = styled.div`
 
 export default function ImageComponent(user) {
   const [imageUrl, setImageUrl] = useState(null);
-
   useEffect(() => {
     const getImageUrl = async () => {
       try {
-        /*const url = await Storage.get(
-          `${bucket}/protected/avatars/${user}.jpg`
-        );*/
-        setImageUrl(
-          'https://testing-storage-d625e700185611-staging.s3.eu-central-1.amazonaws.com/protected/avatars/cdbf3654-f9f1-480b-af01-4a13910edc7e.jpg'
-        );
+        const url = await Storage.get(`avatars/${user.user}.jpg`);
+        setImageUrl(url);
       } catch (error) {
         console.error('Error retrieving image:', error);
       }
@@ -66,7 +61,6 @@ export default function ImageComponent(user) {
   }, []);
 
   if (!imageUrl) {
-    console.log(imageUrl);
     return (
       <AvatarLoading>
         <span>Avatar is Loading</span>

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import UserDescription from './UserDescription';
 import { useContext } from 'react';
 import { UserContext } from '../../App';
+import UserDescription from './UserDescription';
 import Avatar from './Avatar.jsx';
+import Posts from './Posts';
 
 const Container = styled.div`
   display: grid;
@@ -27,6 +28,7 @@ export default function Profile() {
     <Container>
       <Avatar user={userContext.user.username}></Avatar>
       <UserDescription user={userContext.user.username}></UserDescription>
+      <Posts user={userContext.user.username}></Posts>
     </Container>
   );
 }

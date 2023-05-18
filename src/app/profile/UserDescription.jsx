@@ -9,18 +9,19 @@ const UserDescriptionContainer = styled.div`
   grid-column-end: profile-end;
   display: flex;
   flex-direction: column;
-
   border-left: solid 1px hsla(210, 10%, 40%, 0.5);
   color: hsl(210, 25%, 25%);
 `;
 
 const NicknameSpan = styled.span`
   margin-top: 1vh;
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
 `;
 
-const UserDescriptionSpan = styled.span``;
+const UserDescriptionSpan = styled.span`
+  font-size: 1.2em;
+`;
 
 function getUser(user) {
   return `query GetUser {
