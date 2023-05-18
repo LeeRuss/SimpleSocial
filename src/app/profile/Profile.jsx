@@ -1,13 +1,32 @@
 import styled from 'styled-components';
+import UserDescription from './UserDescription';
+import { useContext } from 'react';
+import { UserContext } from '../../App';
+import Avatar from './Avatar.jsx';
 
-const Test = styled.div`
-  background-color: rgba(0, 0, 0, 0);
-  display: block;
-  max-width: 100%;
-  min-height: 2000px;
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: [profile-start] 20vh [posts-start] auto [profile-end];
+  grid-template-columns: [profile-start] 40% [desc-start] 60% [profile-end];
+  justify-content: center;
+  min-width: 60%;
+  width: 900px;
+  max-width: 80%;
+  min-height: 80vh;
+  margin-top: 3%;
+  margin-bottom: 1%;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 6px 36px 3px rgba(66, 68, 90, 1);
+  border-radius: 10px;
   color: white;
 `;
 
 export default function Profile() {
-  return <Test></Test>;
+  const userContext = useContext(UserContext);
+  return (
+    <Container>
+      <Avatar user={userContext.user.username}></Avatar>
+      <UserDescription user={userContext.user.username}></UserDescription>
+    </Container>
+  );
 }

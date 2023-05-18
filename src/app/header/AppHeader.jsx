@@ -13,7 +13,8 @@ const Header = styled.header`
   grid-template-rows: [row-start] 100% [row-end];
   grid-template-columns: [first] 30% [searchbar-start] 40%[buttons-start] 30% [buttons-end];
   min-height: 65px;
-  height: 8%;
+  height: 8vh;
+  max-height: 8vh;
   max-width: 100%;
   background-color: hsl(220, 50%, 50%);
   box-shadow: 0px 7px 14px 6px rgba(66, 68, 90, 1);
@@ -32,7 +33,7 @@ const HomeLinkContainer = styled.div`
   padding-left: 10%;
   align-items: center;
   @media only screen and (max-width: 500px) {
-    padding-left: 5px;
+    padding-left: 10px;
   }
 `;
 
@@ -59,12 +60,14 @@ const AppHeaderButtonsContainer = styled.div`
   align-items: center;
   padding-right: 10%;
   @media only screen and (max-width: 500px) {
-    padding-right: 5px;
+    padding-right: 10px;
   }
 `;
 
 const SignOutButton = styled.button`
+  min-width: 60px;
   width: 7vh;
+  min-height: 60px;
   height: 7vh;
   border-radius: 50%;
   background-color: hsl(220, 70%, 70%);
@@ -77,7 +80,9 @@ const SignOutButton = styled.button`
   }
 
   @media only screen and (max-width: 500px) {
+    min-width: 40px;
     width: 5vh;
+    min-height: 40px;
     height: 5vh;
   }
 `;

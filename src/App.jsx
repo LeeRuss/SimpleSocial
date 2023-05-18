@@ -20,6 +20,7 @@ const AppWrapper = styled.div`
   background-color: hsl(220, 95%, 95%);
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 function App({ signOut, user }) {
@@ -28,8 +29,8 @@ function App({ signOut, user }) {
     <AppWrapper>
       <UserContext.Provider value={{ signOut: signOut, user: user }}>
         <AppHeader></AppHeader>
+        <Outlet context={user} />
       </UserContext.Provider>
-      <Outlet context={user} />
     </AppWrapper>
   );
 }
