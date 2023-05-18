@@ -58,7 +58,7 @@ export default function ImageComponent(user) {
     };
 
     getImageUrl();
-  }, []);
+  }, [user]);
 
   if (!imageUrl) {
     return (

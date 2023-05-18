@@ -41,7 +41,7 @@ export default function ProfileLinksContainer({ users }) {
     <Container>
       {users.map((item, i) => {
         return (
-          <SearchBarLink to="/profile" state={{ user: item.id }} key={i}>
+          <SearchBarLink to={`/profile/${item.id}`} key={i}>
             {item.nickname}
           </SearchBarLink>
         );

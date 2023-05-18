@@ -50,7 +50,7 @@ export default function UserDescription({ user }) {
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
   if (isLoading) {
     return <UserDescriptionContainer></UserDescriptionContainer>;
   }

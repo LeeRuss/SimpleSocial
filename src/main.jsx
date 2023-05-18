@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Profile from './app/profile/Profile';
+import OtherProfile from './app/profile/OtherProfile';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -11,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Profile />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:userId" element={<OtherProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
