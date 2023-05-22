@@ -20,6 +20,10 @@ const Container = styled.div`
   box-shadow: 0px 6px 36px 3px rgba(66, 68, 90, 1);
   border-radius: 10px;
   color: white;
+  @media only screen and (max-width: 400px) {
+    max-width: 100vw;
+    width: 100vw;
+  }
 `;
 
 export default function Profile() {

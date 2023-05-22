@@ -20,7 +20,7 @@ const Header = styled.header`
   box-shadow: 0px 7px 14px 6px rgba(66, 68, 90, 1);
   color: white;
   @media only screen and (max-width: 500px) {
-    grid-template-columns: [first] auto [searchbar-start] 50% [buttons-start] auto [buttons-end];
+    grid-template-columns: [first] 25% [searchbar-start] 40% [buttons-start] 35% [buttons-end];
   }
 `;
 
@@ -59,12 +59,13 @@ const AppHeaderButtonsContainer = styled.div`
   flex-direction: row-reverse;
   align-items: center;
   padding-right: 10%;
-  @media only screen and (max-width: 500px) {
-    padding-right: 10px;
+  @media only screen and (max-width: 600px) {
+    justify-content: space-evenly;
+    padding-right: 0px;
   }
 `;
 
-const SignOutButton = styled.button`
+const HeaderButton = styled.button`
   min-width: 60px;
   width: 7vh;
   min-height: 60px;
@@ -74,16 +75,21 @@ const SignOutButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 5%;
 
   &:hover {
     border-color: hsl(220, 100%, 20%);
   }
+  @media only screen and (max-width: 600px) {
+    margin-left: 0px;
+  }
 
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 550px) {
     min-width: 40px;
     width: 5vh;
     min-height: 40px;
     height: 5vh;
+    margin-left: 10px;
   }
 `;
 
@@ -101,11 +107,16 @@ export default function AppHeader() {
       <Searchbar setSearchedUsers={setSearchedUsers}></Searchbar>
       <ProfileLinksContainer users={searchedUsers}></ProfileLinksContainer>
       <AppHeaderButtonsContainer>
-        <SignOutButton onClick={userContext.signOut}>
+        <HeaderButton onClick={userContext.signOut}>
           <AppHeaderSpan className="material-symbols-outlined link">
             logout
           </AppHeaderSpan>
-        </SignOutButton>
+        </HeaderButton>
+        <HeaderButton onClick={userContext.signOut}>
+          <AppHeaderSpan className="material-symbols-outlined link">
+            post_add
+          </AppHeaderSpan>
+        </HeaderButton>
       </AppHeaderButtonsContainer>
     </Header>
   );

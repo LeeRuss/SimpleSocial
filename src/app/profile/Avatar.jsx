@@ -9,16 +9,16 @@ const Avatar = styled.img`
   grid-row-end: posts-start;
   align-self: center;
   justify-self: center;
-  width: 18vh;
-  height: 18vh;
+  width: 15vh;
+  height: 15vh;
   background-color: rgb(64, 106, 191);
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid black;
 
-  @media only screen and (max-width: 400px) {
-    width: 10vh;
-    height: 10vh;
+  @media only screen and (max-width: 650px) {
+    width: 20vw;
+    height: 20vw;
   }
 `;
 
