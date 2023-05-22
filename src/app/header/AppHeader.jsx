@@ -98,7 +98,6 @@ export default function AppHeader() {
   const userContext = useContext(UserContext);
   const [searchedUsers, setSearchedUsers] = useState([]);
   const [isPostFormOpen, setIsPostFormOpen] = useState(false);
-  console.log(searchedUsers);
   return (
     <Header>
       <HomeLinkContainer>
