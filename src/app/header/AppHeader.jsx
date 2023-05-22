@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { UserContext } from '../../App';
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef } from 'react';
 import ProfileLinksContainer from './ProfileLinksContainer';
 import Searchbar from './Searchbar';
+import PostForm from './PostForm';
 
 const Header = styled.header`
   display: grid;
@@ -96,6 +97,7 @@ const HeaderButton = styled.button`
 export default function AppHeader() {
   const userContext = useContext(UserContext);
   const [searchedUsers, setSearchedUsers] = useState([]);
+  const [isPostFormOpen, setIsPostFormOpen] = useState(false);
   console.log(searchedUsers);
   return (
     <Header>
@@ -112,12 +114,22 @@ export default function AppHeader() {
             logout
           </AppHeaderSpan>
         </HeaderButton>
-        <HeaderButton onClick={userContext.signOut}>
+        <HeaderButton
+          onClick={() => {
+            setIsPostFormOpen(true);
+          }}
+        >
           <AppHeaderSpan className="material-symbols-outlined link">
             post_add
           </AppHeaderSpan>
         </HeaderButton>
       </AppHeaderButtonsContainer>
+      <PostForm
+        isOpened={isPostFormOpen}
+        onClose={() => {
+          setIsPostFormOpen(false);
+        }}
+      ></PostForm>
     </Header>
   );
 }
