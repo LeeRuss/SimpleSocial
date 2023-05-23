@@ -29,6 +29,9 @@ const SearchBarLink = styled(Link)`
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: solid;
+    &:hover {
+      border-color: hsl(220, 100%, 20%);
+    }
   }
   &:last-of-type {
     border-bottom-left-radius: 10px;
