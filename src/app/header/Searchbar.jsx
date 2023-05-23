@@ -49,9 +49,11 @@ export default function Searchbar({ setSearchedUsers }) {
       type="text"
       placeholder="Search user"
       onChange={searchUsers}
-      /*onBlur={() => {
-        setSearchedUsers([]);
-      }}*/
+      onBlur={() => {
+        setTimeout(() => {
+          setSearchedUsers([]);
+        }, 100);
+      }}
     ></SearchBar>
   );
 }
