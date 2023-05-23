@@ -17,6 +17,7 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   width: 1000px;
   height: 600px;
+  min-height: min-content;
   padding: 12px 24px;
   border: solid 1px black;
   border-radius: 10px;
@@ -25,7 +26,7 @@ const ModalContent = styled.div`
 
   @media only screen and (max-width: 600px) {
     width: 100vw;
-    height: 40vh;
+    height: fit-content;
   }
 `;
 
@@ -36,6 +37,10 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -46,6 +51,9 @@ const ImageContainer = styled.div`
   border-radius: 4px;
   width: 49%;
   height: 100%;
+  @media only screen and (max-width: 600px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Image = styled.img`
@@ -58,7 +66,6 @@ const Image = styled.img`
 const PostContent = styled.span`
   align-self: baseline;
   width: 49%;
-  min-height: 100px;
   height: fit-content;
   padding: 12px 20px;
   box-sizing: border-box;
@@ -68,7 +75,10 @@ const PostContent = styled.span`
   color: black;
   font-size: 1.2rem;
   text-align: left;
-  resize: none;
+  overflow-wrap: break-word;
+  @media only screen and (max-width: 600px) {
+    align-self: center;
+  }
 `;
 
 export default function PostForm({ isOpened, onClose, post }) {

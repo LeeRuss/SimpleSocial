@@ -35,7 +35,6 @@ export default function PostPreview(post) {
   const postContext = useContext(PostContext);
 
   const handleClick = (e) => {
-    console.log('klik');
     postContext.openPost(post);
   };
 
