@@ -4,7 +4,7 @@ import { UserContext } from '../../App';
 import { useContext, useState, useRef } from 'react';
 import ProfileLinksContainer from './ProfileLinksContainer';
 import Searchbar from './Searchbar';
-import PostForm from './PostForm';
+import PostForm from '../postForm/PostForm';
 
 const Header = styled.header`
   display: grid;
