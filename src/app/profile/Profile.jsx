@@ -10,8 +10,8 @@ const Container = styled.div`
   grid-template-rows: [profile-start] 20vh [posts-start] auto [profile-end];
   grid-template-columns: [profile-start] 40% [desc-start] 60% [profile-end];
   justify-content: center;
-  min-width: 60%;
-  width: 900px;
+  min-width: 50%;
+  width: 700px;
   max-width: 80%;
   min-height: 80vh;
   margin-top: 3%;

@@ -45,7 +45,7 @@ export default function OtherProfile() {
       <Container>
         <Avatar user={user}></Avatar>
         <UserDescription user={user}></UserDescription>
-        <Span>{user}</Span>
+        <Posts user={user}></Posts>
       </Container>
     );
   }

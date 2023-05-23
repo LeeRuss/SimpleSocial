@@ -105,6 +105,7 @@ export default function PostForm({ isOpened, onClose }) {
         contentType: image.type,
       });
       url = await Storage.get(`posts/${uuid}/image`);
+      console.log(url);
       let newDate = new Date().toISOString();
       let post = {
         id: uuid,
@@ -115,6 +116,7 @@ export default function PostForm({ isOpened, onClose }) {
         usersID: userContext.user.username,
       };
       await API.graphql(graphqlOperation(createPosts, { input: post }));
+      reset();
       onClose();
     } catch (error) {
       console.log('Error uploading file: ', error);
