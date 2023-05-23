@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Storage } from 'aws-amplify';
+import { PostContext } from './Posts';
 
 const Container = styled.div`
   width: 30%;
@@ -21,8 +22,8 @@ const Container = styled.div`
 `;
 
 const Img = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   padding: 0;
   margin: 0;
@@ -30,6 +31,13 @@ const Img = styled.img`
 
 export default function PostPreview(post) {
   const [imageUrl, setImageUrl] = useState(null);
+  const postContext = useContext(PostContext);
+
+  const handleClick = (e) => {
+    console.log('klik');
+    postContext.openPost(post);
+  };
+
   useEffect(() => {
     const getImageUrl = async () => {
       try {
@@ -43,7 +51,7 @@ export default function PostPreview(post) {
     getImageUrl();
   }, [post]);
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <Img src={imageUrl}></Img>
     </Container>
   );

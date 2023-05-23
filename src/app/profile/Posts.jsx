@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import styled from 'styled-components';
 import { API, graphqlOperation } from 'aws-amplify';
 import PostPreview from './PostPreview';
+import Post from './Post';
 
 const PostsContainer = styled.div`
   grid-row-start: posts-start;
@@ -30,14 +30,19 @@ function getPosts(user) {
         images
         text
         createdAt
+        usersID
       }
     }
   }`;
 }
 
+export const PostContext = createContext(undefined);
+
 export default function Posts(user) {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPostOpen, setIsPostOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -47,7 +52,7 @@ export default function Posts(user) {
         let newPosts = await API.graphql(graphqlOperation(getPosts(user)));
         newPosts = newPosts.data.postsByUsersID.items;
         console.log(newPosts);
-        setPosts((currentPosts) => [...newPosts]);
+        setPosts(newPosts);
       } catch (error) {
         console.log(error);
         setError(error);
@@ -57,6 +62,16 @@ export default function Posts(user) {
 
     fetchPosts();
   }, [user]);
+
+  const openPost = (post) => {
+    setSelectedPost(post);
+    setIsPostOpen(true);
+  };
+
+  const closePost = () => {
+    setSelectedPost(null);
+    setIsPostOpen(false);
+  };
 
   if (isLoading) {
     return (
@@ -73,10 +88,19 @@ export default function Posts(user) {
     );
   }
   return (
-    <PostsContainer>
-      {posts.map((item, i) => {
-        return <PostPreview post={item} key={i}></PostPreview>;
-      })}
-    </PostsContainer>
+    <PostContext.Provider value={{ openPost: openPost }}>
+      <PostsContainer>
+        {posts.map((item, i) => {
+          return <PostPreview post={item} key={i}></PostPreview>;
+        })}
+        {isPostOpen && (
+          <Post
+            post={selectedPost}
+            isOpened={isPostOpen}
+            onClose={closePost}
+          ></Post>
+        )}
+      </PostsContainer>
+    </PostContext.Provider>
   );
 }
