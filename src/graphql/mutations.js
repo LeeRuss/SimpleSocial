@@ -151,9 +151,7 @@ export const createPosts = /* GraphQL */ `
       usersID
       createdAt
       updatedAt
-      _version
       _deleted
-      _lastChangedAt
     }
   }
 `;

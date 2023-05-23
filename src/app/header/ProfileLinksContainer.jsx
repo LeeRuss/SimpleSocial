@@ -29,6 +29,9 @@ const SearchBarLink = styled(Link)`
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: solid;
+    &:hover {
+      border-color: hsl(220, 100%, 20%);
+    }
   }
   &:last-of-type {
     border-bottom-left-radius: 10px;
@@ -41,7 +44,7 @@ export default function ProfileLinksContainer({ users }) {
     <Container>
       {users.map((item, i) => {
         return (
-          <SearchBarLink to="/profile" state={{ user: item.id }} key={i}>
+          <SearchBarLink to={`/profile/${item.id}`} key={i}>
             {item.nickname}
           </SearchBarLink>
         );

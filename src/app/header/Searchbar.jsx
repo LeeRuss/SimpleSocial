@@ -50,7 +50,9 @@ export default function Searchbar({ setSearchedUsers }) {
       placeholder="Search user"
       onChange={searchUsers}
       onBlur={() => {
-        setSearchedUsers([]);
+        setTimeout(() => {
+          setSearchedUsers([]);
+        }, 100);
       }}
     ></SearchBar>
   );
