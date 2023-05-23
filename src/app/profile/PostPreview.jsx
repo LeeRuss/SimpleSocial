@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: hsl(220, 50%, 50%);
 
   @media (max-width: 800px) {
     margin: auto;
@@ -22,8 +22,9 @@ const Container = styled.div`
 `;
 
 const Img = styled.img`
-  width: 90%;
-  height: 90%;
+  width: 97%;
+  height: 97%;
+  background-color: black;
   object-fit: cover;
   padding: 0;
   margin: 0;

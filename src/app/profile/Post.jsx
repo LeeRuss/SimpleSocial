@@ -74,7 +74,6 @@ const PostContent = styled.span`
 export default function PostForm({ isOpened, onClose, post }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
-  console.log(post);
   useEffect(() => {
     const getImageUrl = async () => {
       try {

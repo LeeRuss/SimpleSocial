@@ -105,7 +105,6 @@ export default function PostForm({ isOpened, onClose }) {
         contentType: image.type,
       });
       url = await Storage.get(`posts/${uuid}/image`);
-      console.log(url);
       let newDate = new Date().toISOString();
       let post = {
         id: uuid,
