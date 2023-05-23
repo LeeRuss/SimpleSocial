@@ -1,6 +1,10 @@
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
+import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { createPosts } from '../../graphql/mutations';
+import { UserContext } from '../../App';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -77,16 +81,48 @@ const ErrorSpan = styled.span`
 `;
 
 export default function PostForm({ isOpened, onClose }) {
+  const userContext = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    onClose();
+  const onSubmit = async (data) => {
+    clearErrors();
+    let uuid = uuidv4();
+    let image = data.postImage[0];
+    let postContent = data.postContent;
+    let result;
+    let url = null;
+    try {
+      result = await Storage.put(`posts/${uuid}/image`, image, {
+        contentType: image.type,
+      });
+      url = await Storage.get(`posts/${uuid}/image`);
+      let newDate = new Date().toISOString();
+      let post = {
+        id: uuid,
+        creation_time: newDate,
+        text: postContent,
+        likes: 0,
+        images: [url],
+        usersID: userContext.user.username,
+      };
+      await API.graphql(graphqlOperation(createPosts, { input: post }));
+      onClose();
+    } catch (error) {
+      console.log('Error uploading file: ', error);
+      setError('server', {
+        type: 'cantPublishPost',
+        message: 'We are not able to public your post. Try again later.',
+      });
+    }
   };
 
   const handleImageButton = (event) => {
@@ -94,7 +130,14 @@ export default function PostForm({ isOpened, onClose }) {
   };
 
   const handleImageChange = (event) => {
-    const image = event.target.files[0];
+    let image = event.target.files[0];
+    if (image?.type != 'image/jpeg' && image.type != 'image/png') {
+      setError('selectedFile', {
+        type: 'fileType',
+        message: 'Only PNGs and JPGs are valid.',
+      });
+      return;
+    } else clearErrors('selectedFile');
     setUploadedImage(image);
   };
 
@@ -104,8 +147,9 @@ export default function PostForm({ isOpened, onClose }) {
   }, [isOpened]);
 
   const handleModalClick = (event) => {
-    const target = event.target;
+    let target = event.target;
     if (target === event.currentTarget) {
+      reset();
       onClose();
     }
   };
@@ -144,6 +188,7 @@ export default function PostForm({ isOpened, onClose }) {
                 <input
                   type="file"
                   id="file"
+                  accept="image/jpeg, image/png"
                   onInput={(e) => {
                     handleImageChange(e);
                   }}
@@ -159,7 +204,15 @@ export default function PostForm({ isOpened, onClose }) {
                     You need to upload an image.
                   </ErrorSpan>
                 )}
+                {errors.selectedFile?.type === 'fileType' && (
+                  <ErrorSpan role="alert">
+                    {errors.selectedFile?.message}
+                  </ErrorSpan>
+                )}
                 <Button type="submit">Post</Button>
+                {errors.server?.type === 'cantPublishPost' && (
+                  <ErrorSpan role="alert">{errors.server?.message}</ErrorSpan>
+                )}
               </form>
               <ImageContainer>
                 {uploadedImage && (
