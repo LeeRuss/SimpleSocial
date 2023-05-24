@@ -51,6 +51,13 @@ export default function Posts(user) {
         setError(null);
         let newPosts = await API.graphql(graphqlOperation(getPosts(user)));
         newPosts = newPosts.data.postsByUsersID.items;
+        console.log(newPosts);
+        newPosts.sort((x, y) => {
+          if (new Date(x.createdAt) < new Date(y.createdAt)) {
+            return 1;
+          }
+          return -1;
+        });
         setPosts(newPosts);
       } catch (error) {
         console.log(error);
