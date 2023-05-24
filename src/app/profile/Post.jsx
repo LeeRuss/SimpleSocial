@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Storage } from 'aws-amplify';
 
 const ModalOverlay = styled.div`
