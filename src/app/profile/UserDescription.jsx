@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../../App';
 import { useContext } from 'react';
-import { updateUsers } from '../../graphql/mutations';
 
 const UserDescriptionContainer = styled.div`
   grid-row-start: profile-start;
@@ -34,6 +33,7 @@ const NicknameSpan = styled.span`
 const UserDescriptionSpan = styled.span`
   font-size: 1.2em;
   justify-self: center;
+  text-align: center;
   width: 100%;
 `;
 
@@ -54,7 +54,7 @@ const TextArea = styled.textarea`
   width: 98% !important;
   height: 100%;
   font-size: 1.1em;
-  text-align: justify;
+  text-align: center;
   align-self: center;
   margin-bottom: 1%;
   padding: 12px 20px;
@@ -85,6 +85,16 @@ function getUser(user) {
   }`;
 }
 
+function updateDescription(user, description) {
+  console.log(description);
+  return `mutation MyMutation {
+    updateUsers(input: {id: "${user}", description: "${description}"}) {
+      id
+      description
+    }
+  }`;
+}
+
 export default function UserDescription({ user }) {
   const userContext = useContext(UserContext);
   const [userData, setUserData] = useState(null);
@@ -99,17 +109,24 @@ export default function UserDescription({ user }) {
     reset,
   } = useForm();
 
+  const changeEditing = () => {
+    if (isEditing) {
+      reset();
+      setIsEditing(false);
+    } else setIsEditing(true);
+  };
+
   const onSubmit = async (data) => {
     try {
-      await API.graphql({
-        query: updateUsers,
-        variables: {
-          input: {
-            id: userData.id,
-            description: data.description,
-          },
-        },
-      });
+      const operation = await API.graphql(
+        graphqlOperation(updateDescription(userData.id, data.description))
+      );
+      console.log(operation);
+      if (operation.description !== data.description) {
+        throw new Error(
+          'Record updated but value stayed the same, server error.'
+        );
+      }
       clearErrors();
       changeEditing();
     } catch (error) {
@@ -119,13 +136,6 @@ export default function UserDescription({ user }) {
         message: 'We are not able to update description. Try again later.',
       });
     }
-  };
-
-  const changeEditing = () => {
-    if (isEditing) {
-      setIsEditing(false);
-    } else setIsEditing(true);
-    reset();
   };
 
   useEffect(() => {
