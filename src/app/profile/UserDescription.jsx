@@ -40,6 +40,7 @@ const UserDescriptionSpan = styled.span`
 const EditButton = styled.button`
   align-self: flex-end;
   display: flex;
+  align-self: ${(props) => (props.$baseline ? 'baseline' : '')};
   justify-content: center;
   align-items: center;
   margin-right: 1%;
@@ -73,6 +74,7 @@ const FormButtonsContainer = styled.div`
 
 const ErrorSpan = styled.span`
   color: #c50404;
+  width: 100%;
 `;
 
 function getUser(user) {
@@ -177,13 +179,14 @@ export default function UserDescription({ user }) {
               <EditButton
                 type="submit"
                 className="material-symbols-outlined link"
+                $baseline
               >
                 done
               </EditButton>
               <EditButton
                 onClick={changeEditing}
                 className="material-symbols-outlined link"
-                settings
+                $baseline
               >
                 close
               </EditButton>
