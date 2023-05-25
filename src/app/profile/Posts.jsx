@@ -5,21 +5,18 @@ import PostPreview from './PostPreview';
 import Post from './Post';
 
 const PostsContainer = styled.div`
-  grid-row-start: posts-start;
-  grid-row-end: profile-end;
   grid-column-start: profile-start;
   grid-column-end: profile-end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   height: min-content;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
   padding: 1%;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   border-top: solid 1px hsla(210, 10%, 40%, 0.5);
   color: hsl(210, 25%, 25%);
+  grid-gap: 12px;
 `;
 
 function getPosts(user) {

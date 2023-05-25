@@ -4,26 +4,19 @@ import { Storage } from 'aws-amplify';
 import { PostContext } from './Posts';
 
 const Container = styled.div`
-  width: 30%;
+  width: 100%;
   aspect-ratio: 1/1;
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsl(220, 50%, 50%);
 
   @media (max-width: 800px) {
-    margin: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
   }
 `;
 
 const Img = styled.img`
-  width: 97%;
-  height: 97%;
+  width: 100%;
+  height: 100%;
   background-color: black;
   object-fit: cover;
   padding: 0;
