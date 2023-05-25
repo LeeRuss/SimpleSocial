@@ -46,7 +46,6 @@ const EditButton = styled.button`
   margin-right: 1%;
   width: 20px;
   font-size: 20px;
-  z-index: 2;
   color: hsl(220, 50%, 50%);
   background-color: rgba(255, 255, 255, 0);
 `;
