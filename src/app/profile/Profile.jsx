@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useContext } from 'react';
 import { UserContext } from '../../App';
 import UserDescription from './UserDescription';
-import Avatar from './Avatar.jsx';
+import UserAvatar from './UserAvatar.jsx';
 import Posts from './Posts';
 
 const Container = styled.div`
@@ -30,7 +30,7 @@ export default function Profile() {
   const userContext = useContext(UserContext);
   return (
     <Container>
-      <Avatar user={userContext.user.username}></Avatar>
+      <UserAvatar user={userContext.user.username}></UserAvatar>
       <UserDescription user={userContext.user.username}></UserDescription>
       <Posts user={userContext.user.username}></Posts>
     </Container>

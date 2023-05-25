@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import UserDescription from './UserDescription';
-import Avatar from './Avatar.jsx';
+import UserAvatar from './UserAvatar.jsx';
 import Posts from './Posts';
 import { useState, useEffect } from 'react';
 
@@ -37,7 +37,7 @@ export default function OtherProfile() {
   if (user) {
     return (
       <Container>
-        <Avatar user={user}></Avatar>
+        <UserAvatar user={user}></UserAvatar>
         <UserDescription user={user}></UserDescription>
         <Posts user={user}></Posts>
       </Container>
