@@ -88,10 +88,10 @@ function getUser(user) {
 }
 
 function updateDescription(user, description) {
-  console.log(description);
   return `mutation MyMutation {
     updateUsers(input: {id: "${user}", description: "${description}"}) {
       id
+      nickname
       description
     }
   }`;
@@ -123,12 +123,12 @@ export default function UserDescription({ user }) {
       const operation = await API.graphql(
         graphqlOperation(updateDescription(userData.id, data.description))
       );
-      console.log(operation);
-      if (operation.description !== data.description) {
+      if (operation.data.updateUsers.description === userData.description) {
         throw new Error(
           'Record updated but value stayed the same, server error.'
         );
       }
+      setUserData(operation.data.updateUsers);
       clearErrors();
       changeEditing();
     } catch (error) {
