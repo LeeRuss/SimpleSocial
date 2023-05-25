@@ -9,17 +9,15 @@ const Avatar = styled.img`
   grid-row-end: posts-start;
   align-self: center;
   justify-self: center;
-  width: 15vh;
-  height: 15vh;
+  width: 90%;
+  max-width: 250px;
+  margin: 5px 0px;
+  aspect-ratio: 1/1;
   background-color: rgb(64, 106, 191);
+  text-align: center;
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid black;
-
-  @media only screen and (max-width: 650px) {
-    width: 20vw;
-    height: 20vw;
-  }
 `;
 
 const AvatarLoading = styled.div`
@@ -32,17 +30,14 @@ const AvatarLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18vh;
-  height: 18vh;
+  width: 90%;
+  max-width: 250px;
+  margin: 5px 0px;
+  aspect-ratio: 1/1;
   background-color: rgb(64, 106, 191);
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid black;
-
-  @media only screen and (max-width: 400px) {
-    width: 10vh;
-    height: 10vh;
-  }
 `;
 
 export default function ImageComponent(user) {
@@ -50,7 +45,8 @@ export default function ImageComponent(user) {
   useEffect(() => {
     const getImageUrl = async () => {
       try {
-        const url = await Storage.get(`avatars/${user.user}.jpg`);
+        const url = await Storage.get(`avatars/${user.user}`);
+        console.log(url);
         setImageUrl(url);
       } catch (error) {
         console.error('Error retrieving image:', error);
