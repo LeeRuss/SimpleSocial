@@ -16,13 +16,13 @@ const Container = styled.div`
 `;
 
 export const Avatar = styled.img`
-  width: 90%;
-  max-width: 250px;
-  margin: 5px 0px;
+  width: ${(props) => (props.$solo ? '90%' : '100%')};
+  max-width: ${(props) => (props.$solo ? '250px' : 'none')};
   aspect-ratio: 1/1;
   background-color: rgb(64, 106, 191);
   text-align: center;
   object-fit: cover;
+  margin: ${(props) => (props.$solo ? '5px 0px' : '0px 0px')};
   border-radius: 50%;
   border: 2px solid black;
 `;
@@ -45,6 +45,17 @@ const AvatarLoading = styled.div`
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid black;
+`;
+
+const Button = styled.button`
+  display: flex;
+  border: none;
+  width: 90%;
+  max-width: 250px;
+  margin: 5px 0px;
+  aspect-ratio: 1/1;
+  padding: 0;
+  border-radius: 50%;
 `;
 
 export default function UserAvatar(user) {
@@ -75,16 +86,18 @@ export default function UserAvatar(user) {
 
   return (
     <Container>
-      <Avatar
-        onClick={() => {
-          if (userContext.user.username === user.user) {
-            console.log('działa');
+      {userContext.user.username === user.user ? (
+        <Button
+          onClick={() => {
             setIsAvatarFormOpen(true);
-          }
-        }}
-        src={imageUrl}
-        alt="Avatar"
-      />
+          }}
+        >
+          <Avatar src={imageUrl} alt="Avatar" />
+        </Button>
+      ) : (
+        <Avatar src={imageUrl} alt="Avatar" $solo />
+      )}
+
       <AvatarForm
         user={user.user}
         currentImage={imageUrl}
