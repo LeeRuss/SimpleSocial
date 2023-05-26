@@ -176,6 +176,7 @@ export default function UserDescription({ user }) {
             ></TextArea>
             <FormButtonsContainer>
               <EditButton
+                title="Confirm"
                 type="submit"
                 className="material-symbols-outlined link"
                 $baseline
@@ -183,6 +184,7 @@ export default function UserDescription({ user }) {
                 done
               </EditButton>
               <EditButton
+                title="Cancel"
                 onClick={changeEditing}
                 className="material-symbols-outlined link"
                 $baseline
@@ -204,6 +206,7 @@ export default function UserDescription({ user }) {
             <UserDescriptionSpan>{userData.description}</UserDescriptionSpan>
             {userContext.user.username === user && (
               <EditButton
+                title="Change description"
                 onClick={changeEditing}
                 className="material-symbols-outlined link"
                 settings

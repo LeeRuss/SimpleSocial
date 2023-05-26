@@ -106,12 +106,13 @@ export default function AppHeader() {
       <Searchbar setSearchedUsers={setSearchedUsers}></Searchbar>
       <ProfileLinksContainer users={searchedUsers}></ProfileLinksContainer>
       <AppHeaderButtonsContainer>
-        <HeaderButton onClick={userContext.signOut}>
+        <HeaderButton title="Log out" onClick={userContext.signOut}>
           <AppHeaderSpan className="material-symbols-outlined link">
             logout
           </AppHeaderSpan>
         </HeaderButton>
         <HeaderButton
+          title="Add Post"
           onClick={() => {
             setIsPostFormOpen(true);
           }}

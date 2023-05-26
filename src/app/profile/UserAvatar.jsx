@@ -88,6 +88,7 @@ export default function UserAvatar(user) {
     <Container>
       {userContext.user.username === user.user ? (
         <Button
+          title="Change Avatar"
           onClick={() => {
             setIsAvatarFormOpen(true);
           }}
