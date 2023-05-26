@@ -55,7 +55,6 @@ export default function AvatarForm({
   user,
   setImageUrl,
 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const {
     register,
@@ -67,7 +66,6 @@ export default function AvatarForm({
   } = useForm();
 
   useEffect(() => {
-    setIsModalOpen(isOpened);
     setUploadedImage(null);
   }, [isOpened]);
 
