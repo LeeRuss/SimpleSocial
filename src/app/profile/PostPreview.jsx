@@ -3,9 +3,18 @@ import { useState, useEffect, useContext } from 'react';
 import { Storage } from 'aws-amplify';
 import { PostContext } from './Posts';
 
-const Img = styled.img`
+const Button = styled.button`
+  display: flex;
+  border: none;
+  padding: 0;
+  margin: 0;
   width: 100%;
   aspect-ratio: 1/1;
+`;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
   background-color: black;
   object-fit: cover;
   &:hover {
@@ -34,5 +43,9 @@ export default function PostPreview(post) {
 
     getImageUrl();
   }, [post]);
-  return <Img src={imageUrl} onClick={handleClick}></Img>;
+  return (
+    <Button onClick={handleClick}>
+      <Img src={imageUrl}></Img>
+    </Button>
+  );
 }
