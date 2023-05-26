@@ -3,24 +3,15 @@ import { useState, useEffect, useContext } from 'react';
 import { Storage } from 'aws-amplify';
 import { PostContext } from './Posts';
 
-const Container = styled.div`
-  width: 100%;
-  aspect-ratio: 1/1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: 800px) {
-  }
-`;
-
 const Img = styled.img`
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1/1;
   background-color: black;
   object-fit: cover;
-  padding: 0;
-  margin: 0;
+  &:hover {
+    border: 3px solid hsl(220, 50%, 50%);
+    box-shadow: 0px 0px 10px hsl(220, 100%, 15%);
+  }
 `;
 
 export default function PostPreview(post) {
@@ -43,9 +34,5 @@ export default function PostPreview(post) {
 
     getImageUrl();
   }, [post]);
-  return (
-    <Container onClick={handleClick}>
-      <Img src={imageUrl}></Img>
-    </Container>
-  );
+  return <Img src={imageUrl} onClick={handleClick}></Img>;
 }
