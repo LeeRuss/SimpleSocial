@@ -20,6 +20,7 @@ const ModalContent = styled.div`
   width: 600px;
   height: 1000px;
   max-height: 95vh;
+  max-width: 95vw;
   padding: 12px 24px;
   border: solid 1px black;
   border-radius: 10px;
@@ -28,7 +29,7 @@ const ModalContent = styled.div`
 
   @media only screen and (max-width: 600px) {
     width: 100vw;
-    height: 80vh;
+    height: 90vh;
   }
 `;
 
@@ -43,6 +44,8 @@ const Container = styled.div`
 
 const Button = styled.button`
   background-color: hsl(220, 50%, 50%);
+  width: fit-content;
+  height: fit-content;
   margin: 10%;
 `;
 const ErrorSpan = styled.span`
@@ -130,6 +133,7 @@ export default function AvatarForm({
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
+                  alignItems: 'center',
                   width: '50%',
                   height: '100%',
                 }}

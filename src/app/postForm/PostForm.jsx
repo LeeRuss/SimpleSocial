@@ -21,6 +21,9 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   width: 1000px;
   height: 600px;
+  max-width: 90vw;
+  max-height: 90vh;
+  min-width: 300px;
   padding: 12px 24px;
   border: solid 1px black;
   border-radius: 10px;
@@ -28,8 +31,8 @@ const ModalContent = styled.div`
   color: black;
 
   @media only screen and (max-width: 600px) {
-    width: 100vw;
-    height: 40vh;
+    width: 90vw;
+    height: 70vh;
   }
 `;
 
@@ -37,6 +40,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  min-height: max-content;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
@@ -44,12 +48,17 @@ const Container = styled.div`
 
 const ImageContainer = styled.div`
   display: flex;
+  align-self: flex-start;
   justify-content: center;
   align-items: center;
   border: solid 3px hsl(220, 50%, 50%);
   border-radius: 4px;
   width: 49%;
   height: 100%;
+  @media only screen and (max-width: 600px) {
+    height: none;
+    aspect-ratio: 1/2;
+  }
 `;
 
 const Image = styled.img`
@@ -73,6 +82,8 @@ const TextArea = styled.textarea`
 `;
 const Button = styled.button`
   background-color: hsl(220, 50%, 50%);
+  width: auto;
+  height: auto;
   margin: 10%;
 `;
 
