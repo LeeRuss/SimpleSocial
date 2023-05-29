@@ -19,6 +19,7 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   width: 600px;
   height: 1000px;
+  max-height: 95vh;
   padding: 12px 24px;
   border: solid 1px black;
   border-radius: 10px;
@@ -163,6 +164,7 @@ export default function AvatarForm({
                 )}
               </form>
               <Avatar
+                $solo
                 src={
                   uploadedImage
                     ? URL.createObjectURL(uploadedImage)
