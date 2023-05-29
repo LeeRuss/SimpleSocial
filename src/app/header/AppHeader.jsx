@@ -126,7 +126,6 @@ export default function AppHeader() {
         isOpened={isPostFormOpen}
         onClose={() => {
           setIsPostFormOpen(false);
-          window.location.reload(false);
         }}
       ></PostForm>
     </Header>

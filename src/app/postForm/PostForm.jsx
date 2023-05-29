@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { createPosts } from '../../graphql/mutations';
 import { UserContext } from '../../App';
+import { usePostsStore } from '../../App';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -103,6 +104,7 @@ export default function PostForm({ isOpened, onClose }) {
     formState: { errors },
     reset,
   } = useForm();
+  const { addPost } = usePostsStore();
 
   const onSubmit = async (data) => {
     clearErrors();
@@ -126,6 +128,7 @@ export default function PostForm({ isOpened, onClose }) {
         usersID: userContext.user.username,
       };
       await API.graphql(graphqlOperation(createPosts, { input: post }));
+      addPost(post);
       reset();
       onClose();
     } catch (error) {

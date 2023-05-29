@@ -1,6 +1,7 @@
 import { useEffect, useState, createContext } from 'react';
 import styled from 'styled-components';
 import { API, graphqlOperation } from 'aws-amplify';
+import { usePostsStore } from '../../App';
 import PostPreview from './PostPreview';
 import Post from './Post';
 
@@ -36,11 +37,12 @@ function getPosts(user) {
 export const PostContext = createContext(undefined);
 
 export default function Posts(user) {
-  const [posts, setPosts] = useState([]);
+  const posts = usePostsStore((state) => state.posts);
   const [isLoading, setIsLoading] = useState(true);
   const [isPostOpen, setIsPostOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [error, setError] = useState(null);
+  const { setPosts } = usePostsStore();
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -48,7 +50,6 @@ export default function Posts(user) {
         setError(null);
         let newPosts = await API.graphql(graphqlOperation(getPosts(user)));
         newPosts = newPosts.data.postsByUsersID.items;
-        console.log(newPosts);
         newPosts.sort((x, y) => {
           if (new Date(x.createdAt) < new Date(y.createdAt)) {
             return 1;
