@@ -22,7 +22,11 @@ export const usePostsStore = create((set) => ({
       posts: [newPost, ...state.posts],
     })),
   removePost: (postToRemove) =>
-    set((state) => ({ posts: state.posts.splice(postToRemove, postToRemove) })),
+    set((state) => {
+      let currentPosts = state.posts;
+      currentPosts.splice(postToRemove, postToRemove);
+      return { posts: currentPosts };
+    }),
 }));
 
 export const UserContext = createContext(undefined);
