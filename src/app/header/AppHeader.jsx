@@ -70,7 +70,7 @@ const HeaderButton = styled.button`
   min-width: 60px;
   width: 7vh;
   min-height: 60px;
-  height: 7vh;
+  aspect-ratio: 1/1;
   border-radius: 50%;
   background-color: hsl(220, 70%, 70%);
   display: flex;
@@ -87,9 +87,7 @@ const HeaderButton = styled.button`
 
   @media only screen and (max-width: 550px) {
     min-width: 40px;
-    width: 5vh;
     min-height: 40px;
-    height: 5vh;
     margin-left: 10px;
   }
 `;
@@ -108,12 +106,13 @@ export default function AppHeader() {
       <Searchbar setSearchedUsers={setSearchedUsers}></Searchbar>
       <ProfileLinksContainer users={searchedUsers}></ProfileLinksContainer>
       <AppHeaderButtonsContainer>
-        <HeaderButton onClick={userContext.signOut}>
+        <HeaderButton title="Log out" onClick={userContext.signOut}>
           <AppHeaderSpan className="material-symbols-outlined link">
             logout
           </AppHeaderSpan>
         </HeaderButton>
         <HeaderButton
+          title="Add Post"
           onClick={() => {
             setIsPostFormOpen(true);
           }}

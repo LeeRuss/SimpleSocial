@@ -1,5 +1,6 @@
-import { useState, createContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { createContext } from 'react';
+import { Outlet } from 'react-router-dom';
+import { create } from 'zustand';
 import './app/signIn/style.css';
 import { Amplify } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
@@ -13,6 +14,21 @@ import AppHeader from './app/header/AppHeader';
 
 Amplify.configure(awsconfig);
 
+export const usePostsStore = create((set) => ({
+  posts: [],
+  setPosts: (newPosts) => set({ posts: newPosts }),
+  addPost: (newPost) =>
+    set((state) => ({
+      posts: [newPost, ...state.posts],
+    })),
+  removePost: (postToRemove) =>
+    set((state) => {
+      let currentPosts = state.posts;
+      currentPosts.splice(postToRemove, postToRemove);
+      return { posts: currentPosts };
+    }),
+}));
+
 export const UserContext = createContext(undefined);
 
 const AppWrapper = styled.div`
@@ -24,12 +40,11 @@ const AppWrapper = styled.div`
 `;
 
 function App({ signOut, user }) {
-  console.log(user);
   return (
     <AppWrapper>
       <UserContext.Provider value={{ signOut: signOut, user: user }}>
         <AppHeader></AppHeader>
-        <Outlet context={user} />
+        <Outlet />
       </UserContext.Provider>
     </AppWrapper>
   );

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Storage } from 'aws-amplify';
 
 const ModalOverlay = styled.div`
@@ -78,10 +78,11 @@ const PostContent = styled.span`
   overflow-wrap: break-word;
   @media only screen and (max-width: 600px) {
     align-self: center;
+    width: 100%;
   }
 `;
 
-export default function PostForm({ isOpened, onClose, post }) {
+export default function Post({ isOpened, onClose, post }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   useEffect(() => {
