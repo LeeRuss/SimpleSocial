@@ -78,10 +78,11 @@ const PostContent = styled.span`
   overflow-wrap: break-word;
   @media only screen and (max-width: 600px) {
     align-self: center;
+    width: 100%;
   }
 `;
 
-export default function PostForm({ isOpened, onClose, post }) {
+export default function Post({ isOpened, onClose, post }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   useEffect(() => {
