@@ -66,7 +66,6 @@ export default function UserAvatar(user) {
     const getImageUrl = async () => {
       try {
         const url = await Storage.get(`avatars/${user.user}`);
-        console.log(url);
         setImageUrl(url);
       } catch (error) {
         console.error('Error retrieving image:', error);

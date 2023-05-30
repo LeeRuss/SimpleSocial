@@ -29,11 +29,9 @@ const Container = styled.div`
 export default function OtherProfile() {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
-  console.log(userId);
   useEffect(() => {
     setUser(userId);
   }, [userId]);
-  console.log(user);
   if (user) {
     return (
       <Container>
