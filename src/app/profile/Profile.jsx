@@ -37,7 +37,7 @@ export default function Profile() {
     setUser(userId);
   }, [userId]);
 
-  if (user == userContext.user.username || user == null) {
+  if (user === userContext.user.username || user == null) {
     return (
       <Container>
         <UserAvatar user={userContext.user.username}></UserAvatar>
