@@ -1,56 +1,14 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Avatar } from './UserAvatar';
+import { Avatar } from './UserAvatar.styled';
 import { useForm } from 'react-hook-form';
 import { Storage } from 'aws-amplify';
-
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContent = styled.div`
-  width: 600px;
-  height: 1000px;
-  max-height: 95vh;
-  max-width: 95vw;
-  padding: 12px 24px;
-  border: solid 1px black;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  color: black;
-
-  @media only screen and (max-width: 600px) {
-    width: 100vw;
-    height: 90vh;
-  }
-`;
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Button = styled.button`
-  background-color: hsl(220, 50%, 50%);
-  width: fit-content;
-  height: fit-content;
-  margin: 10%;
-`;
-const ErrorSpan = styled.span`
-  color: #c50404;
-`;
+import {
+  ModalOverlay,
+  ModalContent,
+  Container,
+  Button,
+  ErrorSpan,
+} from './AvatarForm.styled';
 
 export default function AvatarForm({
   isOpened,
@@ -75,13 +33,12 @@ export default function AvatarForm({
 
   const onSubmit = async (data) => {
     clearErrors();
-    let image = data.postImage[0];
-    let result = null;
+    const image = data.postImage[0];
     try {
-      result = await Storage.put(`avatars/${user}`, image, {
+      const result = await Storage.put(`avatars/${user}`, image, {
         contentType: image.type,
       });
-      let url = await Storage.get(`avatars/${user}`);
+      const url = await Storage.get(`avatars/${user}`);
       reset();
       setImageUrl(url);
       onClose();
@@ -99,7 +56,7 @@ export default function AvatarForm({
   };
 
   const handleImageChange = (event) => {
-    let image = event.target.files[0];
+    const image = event.target.files[0];
     if (image?.type != 'image/jpeg' && image.type != 'image/png') {
       setError('selectedFile', {
         type: 'fileType',
@@ -111,8 +68,7 @@ export default function AvatarForm({
   };
 
   const handleModalClick = (event) => {
-    let target = event.target;
-    if (target === event.currentTarget) {
+    if (event.target === event.currentTarget) {
       reset();
       onClose();
     }

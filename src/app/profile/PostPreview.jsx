@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Storage } from 'aws-amplify';
-import { PostContext } from './Posts';
 
 const Button = styled.button`
   display: flex;
@@ -23,18 +22,17 @@ const Img = styled.img`
   }
 `;
 
-export default function PostPreview(post) {
+export default function PostPreview(props) {
   const [imageUrl, setImageUrl] = useState(null);
-  const postContext = useContext(PostContext);
 
   const handleClick = (e) => {
-    postContext.openPost(post);
+    props.openPost(props.post);
   };
 
   useEffect(() => {
     const getImageUrl = async () => {
       try {
-        const url = await Storage.get(`posts/${post.post.id}/image`);
+        const url = await Storage.get(`posts/${props.post.id}/image`);
         setImageUrl(url);
       } catch (error) {
         console.error('Error retrieving image:', error);
@@ -42,7 +40,7 @@ export default function PostPreview(post) {
     };
 
     getImageUrl();
-  }, [post]);
+  }, [props]);
   return (
     <Button onClick={handleClick}>
       <Img src={imageUrl}></Img>

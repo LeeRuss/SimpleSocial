@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import UserDescription from './UserDescription';
 import UserAvatar from './UserAvatar.jsx';
+import UserPosts from './UserPosts';
 import Posts from './Posts';
 
 const Container = styled.div`
@@ -28,11 +30,30 @@ const Container = styled.div`
 
 export default function Profile() {
   const userContext = useContext(UserContext);
-  return (
-    <Container>
-      <UserAvatar user={userContext.user.username}></UserAvatar>
-      <UserDescription user={userContext.user.username}></UserDescription>
-      <Posts user={userContext.user.username}></Posts>
-    </Container>
-  );
+  const { userId } = useParams();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(userId);
+  }, [userId]);
+
+  if (user === userContext.user.username || user == null) {
+    return (
+      <Container>
+        <UserAvatar user={userContext.user.username}></UserAvatar>
+        <UserDescription user={userContext.user.username}></UserDescription>
+        <UserPosts user={userContext.user.username}></UserPosts>
+      </Container>
+    );
+  }
+
+  if (user) {
+    return (
+      <Container>
+        <UserAvatar user={user}></UserAvatar>
+        <UserDescription user={user}></UserDescription>
+        <Posts user={user}></Posts>
+      </Container>
+    );
+  }
 }
