@@ -26,8 +26,7 @@ export default function Post({ isOpened, onClose, post }) {
   }, [isOpened]);
 
   const handleModalClick = (event) => {
-    let target = event.target;
-    if (target === event.currentTarget) {
+    if (event.target === event.currentTarget) {
       onClose();
     }
   };

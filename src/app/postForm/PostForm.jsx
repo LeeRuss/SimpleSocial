@@ -32,21 +32,18 @@ export default function PostForm({ isOpened, onClose }) {
 
   const onSubmit = async (data) => {
     clearErrors();
-    let uuid = uuidv4();
-    let image = data.postImage[0];
-    let postContent = data.postContent;
-    let result;
-    let url = null;
+    const uuid = uuidv4();
+    const image = data.postImage[0];
     try {
-      result = await Storage.put(`posts/${uuid}/image`, image, {
+      const result = await Storage.put(`posts/${uuid}/image`, image, {
         contentType: image.type,
       });
-      url = await Storage.get(`posts/${uuid}/image`);
-      let newDate = new Date().toISOString();
-      let post = {
+      const url = await Storage.get(`posts/${uuid}/image`);
+      const newDate = new Date().toISOString();
+      const post = {
         id: uuid,
         creation_time: newDate,
-        text: postContent,
+        text: data.postContent,
         likes: 0,
         images: [url],
         usersID: userContext.user.username,

@@ -33,13 +33,12 @@ export default function AvatarForm({
 
   const onSubmit = async (data) => {
     clearErrors();
-    let image = data.postImage[0];
-    let result = null;
+    const image = data.postImage[0];
     try {
-      result = await Storage.put(`avatars/${user}`, image, {
+      const result = await Storage.put(`avatars/${user}`, image, {
         contentType: image.type,
       });
-      let url = await Storage.get(`avatars/${user}`);
+      const url = await Storage.get(`avatars/${user}`);
       reset();
       setImageUrl(url);
       onClose();
@@ -57,7 +56,7 @@ export default function AvatarForm({
   };
 
   const handleImageChange = (event) => {
-    let image = event.target.files[0];
+    const image = event.target.files[0];
     if (image?.type != 'image/jpeg' && image.type != 'image/png') {
       setError('selectedFile', {
         type: 'fileType',
@@ -69,8 +68,7 @@ export default function AvatarForm({
   };
 
   const handleModalClick = (event) => {
-    let target = event.target;
-    if (target === event.currentTarget) {
+    if (event.target === event.currentTarget) {
       reset();
       onClose();
     }

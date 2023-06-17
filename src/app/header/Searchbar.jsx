@@ -30,7 +30,7 @@ const SearchBar = styled.input`
 export default function Searchbar({ setSearchedUsers }) {
   async function searchUsers(event) {
     if (event.target.value && event.target.vale != '') {
-      let users = await API.graphql(
+      const users = await API.graphql(
         graphqlOperation(`query SearchUsers {
             listUsers(filter: {nickname: {contains: "${event.target.value}"}}, limit: 5) {
               items {
