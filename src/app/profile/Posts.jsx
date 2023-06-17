@@ -1,7 +1,6 @@
 import { useEffect, useState, createContext } from 'react';
 import styled from 'styled-components';
 import { API, graphqlOperation } from 'aws-amplify';
-import { usePostsStore } from '../../App';
 import PostPreview from './PostPreview';
 import Post from './Post';
 
