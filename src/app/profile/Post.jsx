@@ -88,7 +88,7 @@ export default function Post({ isOpened, onClose, post }) {
   useEffect(() => {
     const getImageUrl = async () => {
       try {
-        const url = await Storage.get(`posts/${post.post.id}/image`);
+        const url = await Storage.get(`posts/${post.id}/image`);
         setImageUrl(url);
       } catch (error) {
         console.error('Error retrieving image:', error);
@@ -114,7 +114,7 @@ export default function Post({ isOpened, onClose, post }) {
               <ImageContainer>
                 {imageUrl && <Image src={imageUrl}></Image>}
               </ImageContainer>
-              <PostContent>{post.post.text}</PostContent>
+              <PostContent>{post.text}</PostContent>
             </Container>
           </ModalContent>
         </ModalOverlay>

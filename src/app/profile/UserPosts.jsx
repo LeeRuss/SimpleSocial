@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API, graphqlOperation } from 'aws-amplify';
 import { usePostsStore } from '../../App';
@@ -34,14 +34,13 @@ function getPosts(user) {
   }`;
 }
 
-export const PostContext = createContext(undefined);
-
-export default function Posts(user) {
-  const [posts, setPosts] = useState(null);
+export default function UserPosts(user) {
+  const posts = usePostsStore((state) => state.posts);
   const [isLoading, setIsLoading] = useState(true);
   const [isPostOpen, setIsPostOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [error, setError] = useState(null);
+  const { setPosts } = usePostsStore();
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -66,10 +65,10 @@ export default function Posts(user) {
     fetchPosts();
   }, [user]);
 
-  const openPost = (post) => {
+  function openPost(post) {
     setSelectedPost(post);
     setIsPostOpen(true);
-  };
+  }
 
   const closePost = () => {
     setSelectedPost(null);
